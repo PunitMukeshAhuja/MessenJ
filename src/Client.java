@@ -1,6 +1,7 @@
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.sun.istack.internal.Nullable;
+import com.vdurmont.emoji.EmojiParser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,10 @@ public class Client extends JFrame {
     private JTextField inputField;
     private JTextArea textArea;
     private JTextArea userText;
+    private JLabel l1;
+    private JLabel l2;
+    private JLabel l3;
+    private JLabel l4;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private Socket socket;
@@ -90,9 +95,17 @@ public class Client extends JFrame {
                 }
             }
         });
+        addEmoji();
         setVisible(true);
         inputField.requestFocus();
         setup();
+    }
+
+    public void addEmoji() {
+        l1.setText(EmojiParser.parseToUnicode(":smiley:"));
+        l2.setText(EmojiParser.parseToUnicode(":grinning:"));
+        l3.setText(EmojiParser.parseToUnicode(":angry:"));
+        l4.setText(EmojiParser.parseToUnicode(":wink:"));
     }
 
     void setup() {
@@ -264,7 +277,7 @@ public class Client extends JFrame {
         contentPane = new JPanel();
         contentPane.setLayout(new GridLayoutManager(5, 3, new Insets(8, 8, 8, 8), -1, -1));
         final JScrollPane scrollPane1 = new JScrollPane();
-        contentPane.add(scrollPane1, new GridConstraints(1, 0, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        contentPane.add(scrollPane1, new GridConstraints(1, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setText("");
@@ -289,6 +302,27 @@ public class Client extends JFrame {
         final JLabel label1 = new JLabel();
         label1.setText("Connected users:");
         contentPane.add(label1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane3 = new JScrollPane();
+        contentPane.add(scrollPane3, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        scrollPane3.setViewportView(panel1);
+        final JLabel label2 = new JLabel();
+        label2.setHorizontalAlignment(0);
+        label2.setText("");
+        panel1.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        l2 = new JLabel();
+        l2.setHorizontalAlignment(0);
+        l2.setText("Label");
+        panel1.add(l2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        l3 = new JLabel();
+        l3.setHorizontalAlignment(0);
+        l3.setText("Label");
+        panel1.add(l3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        l4 = new JLabel();
+        l4.setHorizontalAlignment(0);
+        l4.setText("Label");
+        panel1.add(l4, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
